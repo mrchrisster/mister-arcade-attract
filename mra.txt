@@ -3,6 +3,7 @@ Gauntlet II.mra
 Gauntlet (rev 14).mra
 SectionZ.mra
 Rampage.mra
+DoDonPachi.mra
 Discs of Tron.mra
 Bionic Commando.mra
 Black Tiger.mra
