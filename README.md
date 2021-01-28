@@ -3,7 +3,7 @@ This script starts a random Arcade game from your collection every 5 Minutes. Yo
 
 # Usage:
 
-Copy ArcadeAttractMode-On.sh and ArcadeAttractMode-Off.sh to Scripts Directory
+Copy ArcadeAttractMode-On.sh, ArcadeAttractMode-Off.sh and mra.txt to /media/fat/Scripts Directory
 
 Make sure you have your Arcade roms setup correctly. I use update-all script for that.
 
