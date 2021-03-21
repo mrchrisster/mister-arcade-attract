@@ -9,4 +9,4 @@ Make sure you have your Arcade roms setup correctly. I use update-all script for
 
 # Notes:
 
-If you are worried about SD card writes, you should not use this. I've been using it a lot over the last year and my SD card (128GB) is working great.
+If you are worried about SD card writes, you should not use this. I've been using it a lot over the past year and my SD card (128GB) is working great.
