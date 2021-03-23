@@ -10,8 +10,7 @@ sleepfpga()
 {
     sleep 300
     mra=$(shuf -n 1 /media/fat/Scripts/mra.txt)
-    sed -i "s/.*bootcore=.*/bootcore=$mra/" /media/fat/MiSTer.ini
-    fpga /media/fat/menu.rbf
+    echo "load_core /media/fat/_Arcade/$mra" > /dev/MiSTer_cmd
 }
 start() {
         printf "Starting Attract Mode: "
@@ -51,5 +50,4 @@ sync
 sync
 /etc/init.d/S98attract start
     mra=$(shuf -n 1 /media/fat/Scripts/mra.txt)
-    sed -i "s/.*bootcore=.*/bootcore=$mra/" /media/fat/MiSTer.ini
-    fpga /media/fat/menu.rbf
+    echo "load_core /media/fat/_Arcade/$mra" > /dev/MiSTer_cmd
