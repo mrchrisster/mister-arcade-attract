@@ -1,4 +1,4 @@
-# This cycles through Arcade cores listed in mra.txt periodically
+# This cycles through Arcade cores listed in Attract_Arcade.txt periodically
 
 mount | grep "on / .*[(,]ro[,$]" -q && RO_ROOT="true"
 [ "${RO_ROOT}" == "true" ] && mount / -o remount,rw
