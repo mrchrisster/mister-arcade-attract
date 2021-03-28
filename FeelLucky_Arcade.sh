@@ -14,10 +14,17 @@ mra=$(shuf -n 1 /media/fat/Scripts/Attract_Arcade.txt)
 until [ -f "/media/fat/_Arcade/${mra}" ]; do
 	mra=$(shuf -n 1 /media/fat/Scripts/Attract_Arcade.txt)
 done
-echo "You get to play ${mra}!"
-echo ""
+# Strip the extension
+mra_short=$(echo "${mra}" | sed -e 's/\.[^.]*$//')
+
+echo "You'll be playing:"
+# Bold the MRA name
+echo -e "\e[1m ${mra_short}"
+# Reset text
+echo -e "\e[0m"
+
 echo "Loading quarters in..."
-for i in {3..1}; do
+for i in {5..1}; do
 	echo "${i} seconds"
 	sleep 1
 done
