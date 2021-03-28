@@ -3,7 +3,7 @@ This script starts a random Arcade game from your collection every 2 Minutes. Yo
 
 # Usage:
 
-Copy the follwing files to /media/fat/Scripts Directory
+Copy the following files to /media/fat/Scripts Directory
 * Attract-Arcade-on.sh 
 * Attract-Arcade-off.sh
 * Attract-Arcade_update.sh
