@@ -4,10 +4,10 @@ This script starts a random Arcade game from your collection every 2 Minutes. Yo
 # Usage:
 
 Copy the following files to /media/fat/Scripts Directory
-* Attract-Arcade-on.sh 
-* Attract-Arcade-off.sh
-* Attract-Arcade_update.sh
-* Attract-Arcade.txt
+* Attract_Arcade_on.sh 
+* Attract_Arcade_off.sh
+* Attract_Arcade_update.sh
+* Attract_Arcade.txt
 
 
 Attract-Arcade.txt contains a list of current Arcade cores for MiSTer that can be manually edited to suit your needs. By executing Attract-Arcade-Update.sh you can update the list to include newly downloaded cores.
