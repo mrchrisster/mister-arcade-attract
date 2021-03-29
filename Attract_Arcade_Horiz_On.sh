@@ -34,11 +34,11 @@ trap "" TERM
 nextcore()
 {
   # Get a random game from the list
-  mra=$(shuf -n 1 /media/fat/Scripts/Attract_Arcade_Horizontal.txt)
+  mra=$(shuf -n 1 /media/fat/Scripts/Attract_Arcade_Horiz.txt)
   # If the mra variable is valid this should immediately pass, but if not it'll keep trying
   # Partially protects against typos from manual editing and strange character parsing problems
   until [ -f "/media/fat/_Arcade/${mra}" ]; do
-  	mra=$(shuf -n 1 /media/fat/Scripts/Attract_Arcade_Horizontal.txt)
+  	mra=$(shuf -n 1 /media/fat/Scripts/Attract_Arcade_Horiz.txt)
   done
   echo "${mra}"
   echo "load_core /media/fat/_Arcade/${mra}" > /dev/MiSTer_cmd
