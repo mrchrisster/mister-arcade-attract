@@ -43,7 +43,6 @@ U.N. Squadron -USA-.mra
 Willow -World-.mra
 Tapper.mra
 Carrier Air Wing -World 901012-.mra
-Gulun.Pa_-_Prototype_1993_-_Japan_931220_L-.mra
 Magic Sword Heroic Fantasy -World 900725-.mra
 Mega Twins -World 900619-.mra
 Nemo -World 901130-.mra
