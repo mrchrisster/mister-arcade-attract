@@ -13,8 +13,7 @@ timer=120
 
 #Curated List of Horizontal Games
 
-games="
-Commando.mra
+games="Commando.mra
 Gauntlet II.mra
 Gauntlet (rev 14).mra
 SectionZ.mra
@@ -65,8 +64,7 @@ Cadillacs and Dinosaurs (World 930201).mra
 Muscle Bomber Duo Ultimate Team Battle (World 931206).mra
 Saturday Night Slam Masters (World 930713).mra
 The Punisher (World 930422).mra
-Warriors of Fate (World 921031).mra
-"
+Warriors of Fate (World 921031).mra"
 
 # Functions
 
