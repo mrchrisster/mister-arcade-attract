@@ -68,10 +68,6 @@ Saturday Night Slam Masters (World 930713).mra
 The Punisher (World 930422).mra
 Warriors of Fate (World 921031).mra
 "
-IFS=$'\n'
-randomgame=$(echo "${games[*]}" |shuf |head -1)
-
-
 
 # Functions
 
