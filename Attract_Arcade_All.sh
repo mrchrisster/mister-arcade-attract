@@ -38,7 +38,7 @@ if [ -f /var/run/attract.pid ]; then
 	kill -9 $(cat /var/run/attract.pid)
 fi
 # Save our PID
-echo $!>/var/run/attract.pid
+echo "$(pidof Attract_Arcade_All.sh)" > /var/run/attract.pid
 
 # Main loop
 while :; do
