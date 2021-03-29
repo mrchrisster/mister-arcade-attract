@@ -10,9 +10,9 @@ Copy the following files to /media/fat/Scripts Directory
 * Attract_Arcade.txt
 
 
-Attract-Arcade.txt contains a list of current Arcade cores for MiSTer that can be manually edited to suit your needs. By executing Attract-Arcade-Update.sh you can update the list to include newly downloaded cores.
+Attract_Arcade.txt contains a list of current Arcade cores for MiSTer that can be manually edited to suit your needs. By executing Attract_Arcade_Update.sh you can update the list to include newly downloaded cores.
 
-For a curated list of only horizontal Arcade Games chosen because they have great looking Attract Screens, you can rename Attract-Arcade-Horizontal.txt to Attract-Arcade.txt
+For a curated list of only horizontal Arcade Games chosen because they have great looking Attract Screens, you can rename Attract_Arcade_Horizontal.txt to Attract_Arcade.txt
 
 Make sure you have your Arcade roms setup correctly. Update-all script works great for that.
 
