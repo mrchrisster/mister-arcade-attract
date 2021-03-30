@@ -1,8 +1,13 @@
 #!/bin/bash
 
+## Description
 # This cycles through arcade cores periodically
 # Games are randomly pulled from all MRAs or a user-provided list
-#
+
+
+## Credits
+# Original concept and implementation by: mrchrisster
+# Additional contributions by: Mellified, kaloun34
 # https://github.com/mrchrisster/mister-arcade-attract/
 
 
@@ -16,7 +21,7 @@
 mrapath=/media/fat/_Arcade
 # Time before going to the next core
 timer=120
-# List of MRAs. Only needed if you want a custom games list. Otherwise MRA list will be auto generated
+# List of MRAs
 mralist="/media/fat/Scripts/Attract_Arcade.txt"
 
 
@@ -63,7 +68,7 @@ build_mralist()
 		mralist="/tmp/Attract_Arcade.txt"
 		
 		# If no MRAs found - suicide!
-		ls -N1 ${mrapath}/*.mra &>/dev/null
+		find {mrapath} -type f \( -iname "*.mra" \) &>/dev/null
 		if [ ! ${?} == 0 ]; then
 			echo "The path ${mrapath} contains no MRA files!"
 			exit 1
@@ -72,7 +77,7 @@ build_mralist()
 		# This prints the list of MRA files in a path,
 		# Cuts the string to just the file name,
 		# Then saves it to the mralist file.
-		ls -N1 ${mrapath}/*.mra | cut -c $(( $(echo ${#mrapath}) + 2 ))- > ${mralist}
+		find {mrapath} -type f \( -iname "*.mra" \) | cut -c $(( $(echo ${#mrapath}) + 2 ))- > ${mralist}
 	fi
 }
 
