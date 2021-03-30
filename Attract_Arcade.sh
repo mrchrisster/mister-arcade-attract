@@ -100,7 +100,7 @@ next_core()
 
 	echo "You'll be playing:"
 	# Bold the MRA name - remove trailing .mra
-	echo -e "\e[1m $(echo "${mra}" | sed -e 's/\.[^.]*$//')"
+	echo -e "\e[1m $(echo $(basename "${mra}") | sed -e 's/\.[^.]*$//')"
 	# Reset text
 	echo -e "\e[0m"
 
