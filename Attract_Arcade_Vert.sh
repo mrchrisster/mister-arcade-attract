@@ -29,7 +29,7 @@ timer=120
 # List of MRAs
 mralist="/media/fat/Scripts/Attract_Arcade.txt"
 # Excluded MRAs
-declare -a mraexclude=('Tetris.mra' 'Bagman.mra' 'River Patrol.mra')
+declare -a mraexclude=('Example Bad.mra' 'Fake Example.mra')
 
 
 ## Functions
