@@ -1,125 +1,152 @@
 #!/bin/bash
 
-# This sets up a Linux daemon to cycle through arcade cores periodically
-# Games are randomly pulled from all MRAs or a user-provided list
-# To adjust the timeout change the "sleep" value
-#
+## Description
+# This cycles through arcade cores periodically
+# Games are randomly pulled from vertical MRAs or a user-provided list
+
+
+## Credits
+# Original concept and implementation by: mrchrisster
+# Additional development by: Mellified
+# And thanks to kaloun34 for contributing!
 # https://github.com/mrchrisster/mister-arcade-attract/
 
-# Variables
 
+## Variables
+# Edit here or save preferred values in
+# /media/fat/Scripts/Arcade_Attract.ini
+# Example:
+# mrapath=/media/usb0/_Arcade
+
+# Vertical files to use
+mravert="_Vertical CW 90 Deg"
+# Directory for _Arcade files - no trailing slash!
+#mrapath="/media/fat/_Arcade"
+mrapath="/media/fat/_Arcade/_Organized/_6 Rotation/_Horizontal"
+#mrapath="/media/fat/_Arcade/_Organized/_6 Rotation/${mravert}"
 # Time before going to the next core
 timer=120
+# List of MRAs
+mralist="/media/fat/Scripts/Attract_Arcade.txt"
+# Excluded MRAs
+declare -a mraexclude=('Tetris.mra' 'Bagman.mra' 'River Patrol.mra')
 
-#Curated List of Horizontal Games
 
-games="Commando.mra
-Gauntlet II.mra
-Gauntlet (rev 14).mra
-SectionZ.mra
-Rampage.mra
-DoDonPachi.mra
-Discs of Tron.mra
-Bionic Commando.mra
-Black Tiger.mra
-Double Dragon.mra
-Forgotten Worlds -World, newer-.mra
-Bubble Bobble.mra
-Star Guards.mra
-Daimakaimura -Japan-.mra
-Double Dragon II - The Revenge.mra
-F-1 Dream.mra
-Forgotten Worlds -World, newer-.mra
-Tetris.mra
-Rush'n Attack (US).mra
-Popeye.mra
-Robotron 2084.mra
-Dynasty Wars -USA, B-Board 89624B- -.mra
-Final Fight -World, set 1-.mra
-Strider -USA, B-Board 89624B-2-.mra
-Tetris (cocktail set 1).mra
-U.N. Squadron -USA-.mra
-Willow -World-.mra
-Tapper.mra
-Carrier Air Wing -World 901012-.mra
-Magic Sword Heroic Fantasy -World 900725-.mra
-Mega Twins -World 900619-.mra
-Nemo -World 901130-.mra
-Captain Commando -World 911202-.mra
-Street Fighter (US, set 1).mra
-Knights of the Round -World 911127-.mra
-Street Fighter II The World Warrior -World 910522-.mra
-The King of Dragons -World 910805-.mra
-Three Wonders -World 910520-.mra
-Street Fighter II  The World Warrior -World 910522-.mra
-Adventure Quiz Capcom World 2 -Japan 920611-.mra
-Varth Operation Thunderstorm -World 920714-.mra
-Pnickies -Japan 940608-.mra
-Pokonyan! Balloon -Japan 940322-.mra
-Mega Man The Power Battle -CPS1, USA 951006-.mra
-Pang! 3 -Euro 950601-.mra
-Quiz Tonosama no Yabou 2 Zenkoku-ban -Japan 950123-.mra
-Street Fighter Zero -CPS Changer, Japan 951020-.mra
-Cadillacs and Dinosaurs (World 930201).mra
-Muscle Bomber Duo Ultimate Team Battle (World 931206).mra
-Saturday Night Slam Masters (World 930713).mra
-The Punisher (World 930422).mra
-Warriors of Fate (World 921031).mra"
-
-# Functions
-
-nextcore()
+## Functions
+parse_cmdline()
 {
-  # Get a random game from the list
-  IFS=$'\n'
-  mra=$(echo "${games[*]}" |shuf |head -1)
-  # If the mra variable is valid this should immediately pass, but if not it'll keep trying
-  # Partially protects against typos from manual editing and strange character parsing problems
-  until [ -f "/media/fat/_Arcade/${mra}" ]; do
-  	mra=$(shuf -n 1 ${mralist})
-  done
-  
-  # Debug output - connect and run script via SSH
-  echo "${mra}"
+	# Load the next core and exit - for testing via ssh
+	# Won't reset the timer!
+	case "${1}" in
+			next)
+					next_core
+					exit 0
+					;;
+	esac
+}
+
+there_can_be_only_one()
+{
+	# If another attract process is running kill it
+	# This can happen if the script is started multiple times
+	if [ -f /var/run/attract.pid ]; then
+		kill -9 $(cat /var/run/attract.pid) &>/dev/null
+	fi
+	# Save our PID
+	echo "$(pidof $(basename ${1}))" > /var/run/attract.pid
+}
+
+parse_ini()
+{
+	# INI Parsing - be kind
+	if [ -f /media/fat/Scripts/Attract_Arcade.ini ]; then
+		while IFS='= ' read var val; do
+			if [[ ${val} ]]; then
+	      declare -g "${var}=${val}"
+	    fi
+		done < /media/fat/Scripts/Attract_Arcade.ini
+	fi
+}
+
+build_mralist()
+{
+	# If the file does not exist make one in /tmp/
+	if [ ! -f ${mralist} ]; then
+		mralist="/tmp/Attract_Arcade.txt"
+		
+		# If no MRAs found - suicide!
+		find "${mrapath}" -maxdepth 1 -type f \( -iname "*.mra" \) &>/dev/null
+		if [ ! ${?} == 0 ]; then
+			echo "The path ${mrapath} contains no MRA files!"
+			exit 1
+		fi
+		
+		# This prints the list of MRA files in a path,
+		# Cuts the string to just the file name,
+		# Then saves it to the mralist file.
+		find "${mrapath}" -maxdepth 1 -type f \( -iname "*.mra" \) | cut -c $(( $(echo ${#mrapath}) + 2 ))- | grep -vFf <(printf '%s\n' ${mraexclude[@]}) > ${mralist}
+	fi
+}
+
+next_core()
+{
+	# Get a random game from the list
+	mra=$(shuf -n 1 ${mralist})
+
+	# If the mra variable is valid this is skipped, but if not it'll try 10 times
+	# Partially protects against typos from manual editing and strange character parsing problems
+	for i in {1..10}; do
+		if [ ! -f "${mrapath}/${mra}" ]; then
+			mra=$(shuf -n 1 ${mralist})
+		fi
+	done
+	# If the MRA is still not valid something is wrong - suicide
+	if [ ! -f "${mrapath}/${mra}" ]; then
+		exit 1
+	fi
+
+	echo "You'll be playing:"
+	# Bold the MRA name - remove trailing .mra
+	echo -e "\e[1m $(echo $(basename "${mra}") | sed -e 's/\.[^.]*$//')"
+	# Reset text
+	echo -e "\e[0m"
+
+	if [ "${1}" == "quarters" ]; then
+		echo "Loading quarters in..."
+		for i in {5..1}; do
+			echo "${i} seconds"
+			sleep 1
+		done
+	fi
 
   # Tell MiSTer to load the next MRA
-  echo "load_core /media/fat/_Arcade/${mra}" > /dev/MiSTer_cmd
+  echo "load_core ${mrapath}/${mra}" > /dev/MiSTer_cmd
+}
+
+loop_core()
+{
+	while :; do
+		next_core
+  	sleep ${timer}
+	done
+}
+
+get_lucky()
+{
+	echo "So you're feeling lucky?"
+	echo ""
+	
+	next_core quarters
 }
 
 
-# Script Start
-
-# Get our list of MRAs from the Scripts file
-mralist="/media/fat/Scripts/Attract_Arcade.txt"
-
-# If the file does not exist make one in /tmp/
-if [ ! -f /media/fat/Scripts/Attract_Arcade.txt ]; then
-	mralist="/tmp/Attract_Arcade.txt"
-	ls -N1 /media/fat/_Arcade/*.mra | sed 's/\/media\/fat\/_Arcade\///' > ${mralist}
-fi
-
-# Load the next core and exit - for testing via ssh
-# Won't reset the timer!
-case "$1" in
-		next)
-				nextcore
-				exit 0
-				;;
-esac
+## Prep
+parse_ini
+build_mralist
+parse_cmdline ${1}
+there_can_be_only_one ${0}
 
 
-# If another attract process is running kill it
-# This can happen if the script is started multiple times
-if [ -f /var/run/attract.pid ]; then
-	kill -9 $(cat /var/run/attract.pid)
-fi
-# Save our PID
-echo "$(pidof ${0})" > /var/run/attract.pid
-
-
-# Loop
-while :; do
-	nextcore
-  sleep ${timer}
-done
+## Main
+loop_core
 exit 0

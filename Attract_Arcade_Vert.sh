@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ## Description
-# This loads a random arcade core from all MRAs
-# Then displays the result before loading it
+# This cycles through arcade cores periodically
+# Games are randomly pulled from vertical MRAs or a user-provided list
 
 
 ## Credits
@@ -21,9 +21,9 @@
 # Vertical files to use
 mravert="_Vertical CW 90 Deg"
 # Directory for _Arcade files - no trailing slash!
-mrapath="/media/fat/_Arcade"
+#mrapath="/media/fat/_Arcade"
 #mrapath="/media/fat/_Arcade/_Organized/_6 Rotation/_Horizontal"
-#mrapath="/media/fat/_Arcade/_Organized/_6 Rotation/${mravert}"
+mrapath="/media/fat/_Arcade/_Organized/_6 Rotation/${mravert}"
 # Time before going to the next core
 timer=120
 # List of MRAs
@@ -148,5 +148,5 @@ there_can_be_only_one ${0}
 
 
 ## Main
-get_lucky
+loop_core
 exit 0
