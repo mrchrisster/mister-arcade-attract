@@ -40,7 +40,7 @@ mralist="/media/fat/Scripts/Attract_Arcade.txt"
 # If the file does not exist make one in /tmp/
 if [ ! -f /media/fat/Scripts/Attract_Arcade.txt ]; then
 	mralist="/tmp/Attract_Arcade.txt"
-	ls -N1 /media/fat/_Arcade/*.mra | sed 's/\/media\/fat\/_Arcade\///' > ${mralist}
+	find /media/fat/_Arcade -type f \( -iname "*.mra" \) | sed 's/\/media\/fat\/_Arcade\///' > ${mralist}
 fi
 
 # Load the next core and exit - for testing via ssh
