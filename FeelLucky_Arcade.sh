@@ -2,11 +2,13 @@
 
 ## Description
 # This loads a random arcade core from all MRAs
+# Then displays the result before loading it
 
 
 ## Credits
 # Original concept and implementation by: mrchrisster
-# Additional contributions by: Mellified, kaloun34
+# Additional development by: Mellified
+# And thanks to kaloun34 for contributing!
 # https://github.com/mrchrisster/mister-arcade-attract/
 
 
@@ -16,12 +18,18 @@
 # Example:
 # mrapath=/media/usb0/_Arcade
 
+# Vertical files to use
+mravert="_Vertical CW 90 Deg"
 # Directory for _Arcade files - no trailing slash!
-mrapath=/media/fat/_Arcade
+mrapath="/media/fat/_Arcade"
+#mrapath="/media/fat/_Arcade/_Organized/_6 Rotation/_Horizontal"
+#mrapath="/media/fat/_Arcade/_Organized/_6 Rotation/${mravert}"
 # Time before going to the next core
 timer=120
 # List of MRAs
 mralist="/media/fat/Scripts/Attract_Arcade.txt"
+# Excluded MRAs
+declare -a mraexclude=('Example Bad.mra' 'Fake Example.mra')
 
 
 ## Functions
@@ -67,7 +75,7 @@ build_mralist()
 		mralist="/tmp/Attract_Arcade.txt"
 		
 		# If no MRAs found - suicide!
-		find ${mrapath} -type f \( -iname "*.mra" \) &>/dev/null
+		find "${mrapath}" -maxdepth 1 -type f \( -iname "*.mra" \) &>/dev/null
 		if [ ! ${?} == 0 ]; then
 			echo "The path ${mrapath} contains no MRA files!"
 			exit 1
@@ -76,7 +84,7 @@ build_mralist()
 		# This prints the list of MRA files in a path,
 		# Cuts the string to just the file name,
 		# Then saves it to the mralist file.
-		find ${mrapath} -type f \( -iname "*.mra" \) | cut -c $(( $(echo ${#mrapath}) + 2 ))- > ${mralist}
+		find "${mrapath}" -maxdepth 1 -type f \( -iname "*.mra" \) | cut -c $(( $(echo ${#mrapath}) + 2 ))- | grep -vFf <(printf '%s\n' ${mraexclude[@]}) > ${mralist}
 	fi
 }
 
