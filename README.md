@@ -8,10 +8,11 @@ To cycle through all MiSTer Arcade cores, copy Attract_Arcade.sh to /media/fat/S
 To use a custom list of arcade games to play create /media/fat/Scripts/Attract_Arcade.txt with 1 MRA file - including extension - per line.
 
 ## Horizontal or Vertical Only
-For a curated list of only horizontal or vertical Arcade Games chosen because they have great looking Attract Screens copy:
-* Attract_Arcade_Horiz.sh
-or
-* Attract_Arcade_Vert.sh
+For a list of only horizontal or vertical Arcade Games, change the orientation in the Attract_Arcade.ini file
+
+## Exclude
+If youw ant to exclude certain games, change the mraexclude in the Attract_Arcade.ini file
+
 
 Make sure you have your Arcade roms setup correctly. [Update-all](https://github.com/theypsilon/Update_All_MiSTer) script works great for that.
 
