@@ -16,7 +16,7 @@
 mrapath=/media/fat/_Arcade
 # Time before going to the next core
 timer=120
-# List of MRAs
+# List of MRAs. Only needed if you want a custom games list. Otherwise MRA list will be auto generated
 mralist="/media/fat/Scripts/Attract_Arcade.txt"
 
 
