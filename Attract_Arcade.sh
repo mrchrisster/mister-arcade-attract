@@ -8,7 +8,7 @@
 ## Credits
 # Original concept and implementation by: mrchrisster
 # Additional development by: Mellified
-# And thanks to kaloun34 for contributing!
+# And thanks to kaloun34 and zakk4223 for contributing!
 # https://github.com/mrchrisster/mister-arcade-attract/
 
 
