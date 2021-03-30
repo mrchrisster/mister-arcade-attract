@@ -14,3 +14,6 @@ or
 * Attract_Arcade_Vert.sh
 
 Make sure you have your Arcade roms setup correctly. [Update-all](https://github.com/theypsilon/Update_All_MiSTer) script works great for that.
+
+## Feeling Lucky?
+Included is FeelLucky_Arcade.sh - a script to start a random Arcade game. Intended to be a fun way to explore your library!
