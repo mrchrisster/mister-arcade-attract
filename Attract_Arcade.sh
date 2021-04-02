@@ -11,21 +11,14 @@
 # And thanks to kaloun34 for contributing!
 # https://github.com/mrchrisster/mister-arcade-attract/
 
-#Default values
+#Default values - Recommend changing values in the INI file, not here.
+
 mrapath="/media/fat/_Arcade"
-
-# Time before going to the next core
-timer=120
-
-# The following two Directories are for your horizontal and vertical games - requires Arcade Organizer Script
-# You can also set the vertical Games to "/media/fat/_Arcade/_Organized/_6 Rotation/_Vertical CCW 90 Deg" for Games that are rotated counter clockwise
 mrapathvert="/media/fat/_Arcade/_Organized/_6 Rotation/_Vertical CW 90 Deg" 
 mrapathhoriz="/media/fat/_Arcade/_Organized/_6 Rotation/_Horizontal"
-
-# Which games do you want to display? - Set it to Horizontal, Vertical or All
+mraexclude=""
+timer=120
 orientation=All
-
-# List of MRAs. If no list is found, the script will use a temporary list
 mralist="/media/fat/Scripts/Attract_Arcade.txt"
 
 ## Functions
@@ -33,8 +26,12 @@ mralist="/media/fat/Scripts/Attract_Arcade.txt"
 parse_ini()
 {
 	# INI Parsing
-	. /media/fat/Scripts/Attract_Arcade.ini
+
+	if [ -f ${basepath}/Attract_Arcade.ini ]; then
+	basepath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+	. ${basepath}/Attract_Arcade.ini
 	IFS=$'\n'
+	fi
 }
 
 parse_cmdline()
