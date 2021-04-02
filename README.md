@@ -1,5 +1,5 @@
 # Mister Arcade Attract Mode
-This script starts a random Arcade game from your collection every 2 minutes. You can play the game during that time, but it will automatically switch to a new game after 2 mins. When you're done, simply reboot your MiSTer from the OSD (F12) menu - or use the power button!
+This script starts a random Arcade game from your collection every 2 minutes. You can play the game during that time, but it will automatically switch to a new game after 2 mins. When you're done, perform a *cold reboot* of your MiSTer from the OSD (F12) menu - or use the power button!
 
 # Usage
 To cycle through all MiSTer Arcade cores, copy Attract_Arcade.sh and Attract_Arcade.ini to /media/fat/Scripts Directory.
@@ -15,5 +15,5 @@ If you want to exclude certain games, add the games to mraexclude in the Attract
 
 Make sure you have your Arcade roms setup correctly. [Update-all](https://github.com/theypsilon/Update_All_MiSTer) script works great for that.
 
-## Feeling Lucky?
-Included is FeelLucky_Arcade.sh - a script to start a random Arcade game. Intended to be a fun way to explore your library!
+# Feeling Lucky?
+Included is FeelLucky_Arcade.sh, which is a fun way to explore your MiSTer arcade library. The script loads a single random arcade game. Play and enjoy!
