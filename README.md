@@ -3,6 +3,7 @@ This script starts a random Arcade game from your collection every 2 minutes. Yo
 
 # Usage
 To cycle through all MiSTer Arcade cores, copy Attract_Arcade.sh and Attract_Arcade.ini to /media/fat/Scripts Directory.
+Attract_Arcade.ini is optional but recommended to use as well for more customization options.
 
 ## Custom List
 To use a custom list of arcade games to play create /media/fat/Scripts/Attract_Arcade.txt with 1 MRA file - including extension - per line.
