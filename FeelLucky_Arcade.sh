@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## Description
-# This cycles through arcade cores periodically
+# This loads a random arcade game
 # Games are randomly pulled from all MRAs or a user-provided list
 
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## Description
-# This cycles through arcade cores periodically
+# This cycles through arcade cores periodically until the MiSTer is rebooted
 # Games are randomly pulled from all MRAs or a user-provided list
 
 
