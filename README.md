@@ -1,5 +1,5 @@
 # Mister Arcade Attract Mode
-This script starts a random Arcade game from your collection every 2 minutes. You can play the game during that time, but it will automatically switch to a new game after 2 mins. When you're done, perform a *cold reboot* of your MiSTer from the OSD (F12) menu - or use the power button!
+This script starts a random Arcade game from your collection every 2 minutes on your MiSTer FPGA device. You can play the game during that time, but it will automatically switch to a new game after 2 mins. When you're done, perform a *cold reboot* of your MiSTer from the OSD (F12) menu - or use the power button!
 
 # Usage
 To cycle through all MiSTer Arcade cores, copy Attract_Arcade.sh and Attract_Arcade.ini to /media/fat/Scripts Directory.
